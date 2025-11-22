@@ -14,7 +14,7 @@
     <!-- AOS Animation Library CSS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-    <!-- Google Fonts: Playfair Display (Serif) & Lato (Sans) -->
+    <!-- Google Fonts -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap');
         
@@ -35,7 +35,47 @@
         ::-webkit-scrollbar-thumb { background: #ec4899; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #db2777; }
 
-        /* Accordion Styling */
+        /* Package Accordion Styling */
+        .package-item {
+            background-color: white;
+            border-left: 4px solid #ec4899;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+        .package-summary {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            cursor: pointer;
+            list-style: none;
+            background-color: #fdf2f8;
+        }
+        .package-summary:hover {
+            background-color: #fce7f3;
+        }
+        .package-summary::-webkit-details-marker { display: none; }
+        .package-summary h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ec4899;
+            font-style: italic;
+        }
+        .package-content {
+            padding: 1.5rem;
+            border-top: 1px solid #fce7f3;
+        }
+
+        /* Pink bullet points */
+        .pink-bullet {
+            color: #ec4899;
+            margin-right: 0.5rem;
+        }
+
+        /* Accordion for other services */
         .accordion-item {
             border: 1px solid #fce7f3;
             border-radius: 0.75rem;
@@ -63,6 +103,20 @@
         .accordion-summary::-webkit-details-marker { display: none; }
         .accordion-content {
             padding: 0 1.5rem 1.5rem 1.5rem;
+        }
+
+        /* Menu dots */
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 0.25rem 0;
+        }
+        .menu-dots {
+            flex: 1;
+            border-bottom: 1px dotted #d1d5db;
+            margin: 0 0.5rem;
+            min-width: 20px;
         }
     </style>
     
@@ -178,123 +232,266 @@
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="py-24 bg-gradient-to-br from-pink-50 to-white">
+    <section id="services" class="py-24 bg-white">
         <div class="container mx-auto px-4">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <span class="text-brand-pink font-bold uppercase tracking-[0.2em] text-sm">What We Offer</span>
-                <h2 class="text-4xl md:text-5xl font-serif font-bold mt-4 mb-4">Our Services</h2>
-                <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
-                    Discover our comprehensive menu of premium nail care services designed for ultimate relaxation and beauty. Please call us for current pricing.
-                </p>
-                <button onclick="openContactModal()" class="px-8 py-4 bg-brand-pink text-white font-bold tracking-widest uppercase hover:bg-white hover:text-brand-pink border-2 border-brand-pink transition-all duration-300 rounded-lg">
-                    Call for Pricing
-                </button>
+            
+            <!-- Purple/Pink Gradient Call Banner -->
+            <div class="max-w-4xl mx-auto mb-12 rounded-2xl bg-gradient-to-r from-pink-500 via-fuchsia-500 to-purple-500 p-8 text-center text-white shadow-xl" data-aos="fade-up">
+                <i data-lucide="phone" class="w-12 h-12 mx-auto mb-4"></i>
+                <h3 class="text-2xl md:text-3xl font-bold mb-2">Call for Pricing and Appointments</h3>
+                <a href="tel:7148206172" class="text-3xl md:text-4xl font-bold hover:underline">714-820-6172</a>
+                <p class="mt-3 text-white/90">We'll help you choose the perfect treatment</p>
             </div>
 
+            <!-- Spa Packages Title -->
+            <div class="max-w-4xl mx-auto mb-8" data-aos="fade-up">
+                <h2 class="text-4xl font-serif font-bold text-brand-pink italic">Spa Packages</h2>
+            </div>
+
+            <!-- 4 Spa Package Dropdowns -->
             <div class="max-w-4xl mx-auto">
-                <!-- Manicure Services -->
-                <details class="accordion-item" data-aos="fade-up">
-                    <summary class="accordion-summary">
-                        Manicure Services
-                        <i data-lucide="chevron-down" class="w-6 h-6 transition-transform"></i>
+                
+                <!-- Refresh Package -->
+                <details class="package-item" data-aos="fade-up">
+                    <summary class="package-summary">
+                        <h3>Refresh Package</h3>
+                        <i data-lucide="chevron-down" class="w-6 h-6 text-brand-pink transition-transform"></i>
                     </summary>
-                    <div class="accordion-content">
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="package-content">
+                        <p class="text-gray-500 italic mb-6">Perfect for a quick refresh and polish</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <!-- Manicure -->
                             <div>
-                                <h4 class="font-bold text-lg mb-3 text-brand-pink">Basic</h4>
+                                <h4 class="font-bold text-xl mb-4 text-gray-800 border-b border-gray-200 pb-2">Manicure</h4>
                                 <ul class="space-y-2 text-gray-700">
-                                    <li>• Classic Manicure</li>
-                                    <li>• Gel Manicure</li>
-                                    <li>• Dipping Powder Manicure</li>
+                                    <li><span class="pink-bullet">•</span> Nail Trimming, Shaping and Cuticle Care</li>
+                                    <li><span class="pink-bullet">•</span> 2-Minute Massage With Warm Towel</li>
+                                    <li><span class="pink-bullet">•</span> Polish Application</li>
                                 </ul>
                             </div>
+                            <!-- Pedicure -->
                             <div>
-                                <h4 class="font-bold text-lg mb-3 text-brand-pink">Overlay</h4>
+                                <h4 class="font-bold text-xl mb-4 text-gray-800 border-b border-gray-200 pb-2">Pedicure</h4>
                                 <ul class="space-y-2 text-gray-700">
-                                    <li>• Acrylic Overlay</li>
-                                    <li>• Dipping Powder Overlay</li>
-                                    <li>• Builder Gel Overlay</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-lg mb-3 text-brand-pink">Full Set</h4>
-                                <ul class="space-y-2 text-gray-700">
-                                    <li>• Acrylic Full Set</li>
-                                    <li>• Dipping Powder Full Set</li>
-                                    <li>• Builder Gel Full Set</li>
-                                    <li>• Gel-X Full Set</li>
+                                    <li><span class="pink-bullet">•</span> Nail Trimming, Shaping and Cuticle Care</li>
+                                    <li><span class="pink-bullet">•</span> Green Tea Mint Aromatherapy</li>
+                                    <li><span class="pink-bullet">•</span> 2-Minute Massage</li>
+                                    <li><span class="pink-bullet">•</span> Hot Stone</li>
+                                    <li><span class="pink-bullet">•</span> Warm Towel</li>
+                                    <li><span class="pink-bullet">•</span> Polish Application</li>
                                 </ul>
                             </div>
                         </div>
-                        <div class="mt-6">
-                            <h4 class="font-bold text-lg mb-3 text-brand-pink">Maintenance & Removal</h4>
-                            <ul class="space-y-2 text-gray-700">
-                                <li>• Refill</li>
-                                <li>• Cut Down</li>
-                                <li>• Gel/Acrylic Removal</li>
-                            </ul>
-                        </div>
-                        <p class="text-xs text-gray-500 italic mt-4">*Price may vary based on length and design complexity. Please call us for details.</p>
                     </div>
                 </details>
 
-                <!-- Pedicure Services -->
-                <details class="accordion-item" data-aos="fade-up" data-aos-delay="100">
-                    <summary class="accordion-summary">
-                        Pedicure Services
-                        <i data-lucide="chevron-down" class="w-6 h-6 transition-transform"></i>
+                <!-- Replenishment Package -->
+                <details class="package-item" data-aos="fade-up" data-aos-delay="100">
+                    <summary class="package-summary">
+                        <h3>Replenishment Package</h3>
+                        <i data-lucide="chevron-down" class="w-6 h-6 text-brand-pink transition-transform"></i>
                     </summary>
-                    <div class="accordion-content">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="package-content">
+                        <p class="text-gray-500 italic mb-6">Restore and rejuvenate with extra care</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <!-- Manicure -->
                             <div>
-                                <h4 class="font-bold text-lg mb-3 text-brand-pink">Classic Pedicures</h4>
+                                <h4 class="font-bold text-xl mb-4 text-gray-800 border-b border-gray-200 pb-2">Manicure</h4>
                                 <ul class="space-y-2 text-gray-700">
-                                    <li>• Basic Pedicure</li>
-                                    <li>• Classic Pedicure</li>
-                                    <li>• Deluxe Pedicure</li>
-                                    <li>• Luxury Spa Pedicure</li>
+                                    <li><span class="pink-bullet">•</span> Nail Trimming, Shaping and Cuticle Care</li>
+                                    <li><span class="pink-bullet">•</span> Hot Oil/Lotion</li>
+                                    <li><span class="pink-bullet">•</span> 5-Minute Massage With Warm Towel</li>
+                                    <li><span class="pink-bullet">•</span> Polish Application</li>
                                 </ul>
                             </div>
+                            <!-- Pedicure -->
                             <div>
-                                <h4 class="font-bold text-lg mb-3 text-brand-pink">Gel Pedicures</h4>
+                                <h4 class="font-bold text-xl mb-4 text-gray-800 border-b border-gray-200 pb-2">Pedicure</h4>
                                 <ul class="space-y-2 text-gray-700">
-                                    <li>• Gel Basic Pedicure</li>
-                                    <li>• Gel Classic Pedicure</li>
-                                    <li>• Gel Deluxe Pedicure</li>
-                                    <li>• Gel Luxury Spa Pedicure</li>
+                                    <li><span class="pink-bullet">•</span> Green Tea Mint Aromatherapy</li>
+                                    <li><span class="pink-bullet">•</span> Nail Trimming, Shaping and Cuticle Care</li>
+                                    <li><span class="pink-bullet">•</span> Exfoliating Scrub</li>
+                                    <li><span class="pink-bullet">•</span> 5-Minute Massage</li>
+                                    <li><span class="pink-bullet">•</span> Hot Stone</li>
+                                    <li><span class="pink-bullet">•</span> Warm Towel</li>
+                                    <li><span class="pink-bullet">•</span> Polish Application</li>
                                 </ul>
                             </div>
                         </div>
-                        <p class="text-xs text-gray-500 italic mt-4">*All pedicures include foot soak, nail shaping, cuticle care, and polish application.</p>
+                    </div>
+                </details>
+
+                <!-- Relax Package -->
+                <details class="package-item" data-aos="fade-up" data-aos-delay="200">
+                    <summary class="package-summary">
+                        <h3>Relax Package</h3>
+                        <i data-lucide="chevron-down" class="w-6 h-6 text-brand-pink transition-transform"></i>
+                    </summary>
+                    <div class="package-content">
+                        <p class="text-gray-500 italic mb-6">Unwind with our enhanced relaxation services</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <!-- Manicure -->
+                            <div>
+                                <h4 class="font-bold text-xl mb-4 text-gray-800 border-b border-gray-200 pb-2">Manicure</h4>
+                                <ul class="space-y-2 text-gray-700">
+                                    <li><span class="pink-bullet">•</span> Nail Trimming, Shaping and Cuticle Care</li>
+                                    <li><span class="pink-bullet">•</span> Exfoliating Scrub</li>
+                                    <li><span class="pink-bullet">•</span> Hot Oil</li>
+                                    <li><span class="pink-bullet">•</span> Lotion or Cooling Gel Application</li>
+                                    <li><span class="pink-bullet">•</span> 7-Minute Massage With Warm Towel</li>
+                                    <li><span class="pink-bullet">•</span> Polish Application</li>
+                                </ul>
+                            </div>
+                            <!-- Pedicure -->
+                            <div>
+                                <h4 class="font-bold text-xl mb-4 text-gray-800 border-b border-gray-200 pb-2">Pedicure</h4>
+                                <ul class="space-y-2 text-gray-700">
+                                    <li><span class="pink-bullet">•</span> Green Tea Mint Aromatherapy</li>
+                                    <li><span class="pink-bullet">•</span> Nail Trimming, Shaping and Cuticle Care</li>
+                                    <li><span class="pink-bullet">•</span> Callus Treatment</li>
+                                    <li><span class="pink-bullet">•</span> Exfoliating Scrub</li>
+                                    <li><span class="pink-bullet">•</span> Lotion or Cooling Gel Application</li>
+                                    <li><span class="pink-bullet">•</span> 7-Minute Massage</li>
+                                    <li><span class="pink-bullet">•</span> Hot Stone</li>
+                                    <li><span class="pink-bullet">•</span> Warm Towel</li>
+                                    <li><span class="pink-bullet">•</span> Polish Application</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- Rejuvenate Package -->
+                <details class="package-item" data-aos="fade-up" data-aos-delay="300">
+                    <summary class="package-summary">
+                        <h3>Rejuvenate Package</h3>
+                        <i data-lucide="chevron-down" class="w-6 h-6 text-brand-pink transition-transform"></i>
+                    </summary>
+                    <div class="package-content">
+                        <p class="text-gray-500 italic mb-6">Our ultimate luxury spa experience</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <!-- Manicure -->
+                            <div>
+                                <h4 class="font-bold text-xl mb-4 text-gray-800 border-b border-gray-200 pb-2">Manicure</h4>
+                                <ul class="space-y-2 text-gray-700">
+                                    <li><span class="pink-bullet">•</span> Nail Trimming, Shaping and Cuticle Care</li>
+                                    <li><span class="pink-bullet">•</span> Exfoliating Scrub</li>
+                                    <li><span class="pink-bullet">•</span> Hot Oil</li>
+                                    <li><span class="pink-bullet">•</span> Lotion or Cooling Gel Application</li>
+                                    <li><span class="pink-bullet">•</span> 12-Minute Relaxing Massage</li>
+                                    <li><span class="pink-bullet">•</span> Warm Towel With Detoxifying Clay Mud Mask</li>
+                                    <li><span class="pink-bullet">•</span> Polish Application</li>
+                                </ul>
+                            </div>
+                            <!-- Pedicure -->
+                            <div>
+                                <h4 class="font-bold text-xl mb-4 text-gray-800 border-b border-gray-200 pb-2">Pedicure</h4>
+                                <ul class="space-y-2 text-gray-700">
+                                    <li><span class="pink-bullet">•</span> Green Tea Mint Aromatherapy</li>
+                                    <li><span class="pink-bullet">•</span> Nail Trimming, Shaping and Cuticle Care</li>
+                                    <li><span class="pink-bullet">•</span> Callus Treatment</li>
+                                    <li><span class="pink-bullet">•</span> Exfoliating Scrub</li>
+                                    <li><span class="pink-bullet">•</span> Lotion or Cooling Gel Application</li>
+                                    <li><span class="pink-bullet">•</span> 12-Minute Relaxing Massage</li>
+                                    <li><span class="pink-bullet">•</span> Hot Stone</li>
+                                    <li><span class="pink-bullet">•</span> Warm Towel With Detoxifying Clay Mud Mask or Hydrating Paraffin Treatment</li>
+                                    <li><span class="pink-bullet">•</span> Polish Application</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- Disclaimers -->
+                <div class="mt-8 space-y-2 text-sm text-gray-500 italic" data-aos="fade-up">
+                    <p>*Price may vary based on length and design complexity. Please call us for details.</p>
+                    <p>*Special pricing available for maintenance appointments. Please call us for pricing.</p>
+                </div>
+
+                <!-- Nail Enhancement -->
+                <details class="accordion-item mt-12" data-aos="fade-up">
+                    <summary class="accordion-summary">
+                        Nail Enhancement
+                        <i data-lucide="chevron-down" class="w-6 h-6"></i>
+                    </summary>
+                    <div class="accordion-content">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div>
+                                <h4 class="font-bold text-lg mb-4 text-brand-pink">Overlay</h4>
+                                <div class="space-y-2 text-gray-700">
+                                    <div class="menu-item"><span>Acrylic</span><span class="menu-dots"></span><span class="font-semibold">$40+</span></div>
+                                    <div class="menu-item"><span>Dipping Powder</span><span class="menu-dots"></span><span class="font-semibold">$45+</span></div>
+                                    <div class="menu-item"><span>Builder Gel</span><span class="menu-dots"></span><span class="font-semibold">$45+</span></div>
+                                </div>
+                                
+                                <h4 class="font-bold text-lg mb-4 mt-6 text-brand-pink">Full Set</h4>
+                                <div class="space-y-2 text-gray-700">
+                                    <div class="menu-item"><span>Acrylic</span><span class="menu-dots"></span><span class="font-semibold">$45+</span></div>
+                                    <div class="menu-item"><span>Dipping Powder</span><span class="menu-dots"></span><span class="font-semibold">$50+</span></div>
+                                    <div class="menu-item"><span>Builder Gel</span><span class="menu-dots"></span><span class="font-semibold">$50+</span></div>
+                                    <div class="menu-item"><span>Gel-X</span><span class="menu-dots"></span><span class="font-semibold">$55+</span></div>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-4 text-brand-pink">Maintenance</h4>
+                                <div class="space-y-2 text-gray-700">
+                                    <div class="menu-item"><span>Refill</span><span class="menu-dots"></span><span class="font-semibold">$40+</span></div>
+                                    <div class="menu-item"><span>Cut Down</span><span class="menu-dots"></span><span class="font-semibold">$3+</span></div>
+                                    <div class="menu-item"><span>Gel Remover</span><span class="menu-dots"></span><span class="font-semibold">$10</span></div>
+                                    <div class="menu-item"><span>Acrylic Remover</span><span class="menu-dots"></span><span class="font-semibold">$15</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-500 italic mt-6">**Price subject to change due to length or extra preparation and cut down</p>
                     </div>
                 </details>
 
                 <!-- Additional Services -->
-                <details class="accordion-item" data-aos="fade-up" data-aos-delay="200">
+                <details class="accordion-item" data-aos="fade-up" data-aos-delay="100">
                     <summary class="accordion-summary">
                         Additional Services
-                        <i data-lucide="chevron-down" class="w-6 h-6 transition-transform"></i>
+                        <i data-lucide="chevron-down" class="w-6 h-6"></i>
                     </summary>
                     <div class="accordion-content">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                                <ul class="space-y-2 text-gray-700">
-                                    <li>• Polish Change (Manicure)</li>
-                                    <li>• Polish Change (Pedicure)</li>
-                                    <li>• Callus Removal</li>
-                                    <li>• Paraffin Treatment</li>
-                                    <li>• Clay Mask</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <ul class="space-y-2 text-gray-700">
-                                    <li>• Shiny Buff</li>
-                                    <li>• Ombre/Chrome/Hologram</li>
-                                    <li>• French Tip</li>
-                                    <li>• Custom Design</li>
-                                    <li>• Sea Salt Scrub</li>
-                                </ul>
-                            </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 text-gray-700">
+                            <div class="menu-item"><span>Polish Change Manicure</span><span class="menu-dots"></span><span class="font-semibold">$10</span></div>
+                            <div class="menu-item"><span>Polish Change Pedicure</span><span class="menu-dots"></span><span class="font-semibold">$15</span></div>
+                            <div class="menu-item"><span>Callus Removal</span><span class="menu-dots"></span><span class="font-semibold">$8</span></div>
+                            <div class="menu-item"><span>Paraffin</span><span class="menu-dots"></span><span class="font-semibold">$10</span></div>
+                            <div class="menu-item"><span>Clay Mask</span><span class="menu-dots"></span><span class="font-semibold">$8</span></div>
+                            <div class="menu-item"><span>Shiny Buff</span><span class="menu-dots"></span><span class="font-semibold">$5</span></div>
+                            <div class="menu-item"><span>Ombre/Chrome/Hologram/Fairy Dust</span><span class="menu-dots"></span><span class="font-semibold">$10</span></div>
+                            <div class="menu-item"><span>French Tip</span><span class="menu-dots"></span><span class="font-semibold">$7+</span></div>
+                            <div class="menu-item"><span>Design</span><span class="menu-dots"></span><span class="font-semibold">$6</span></div>
+                            <div class="menu-item"><span>Sea Salt Scrub</span><span class="menu-dots"></span><span class="font-semibold">$6</span></div>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- Waxing -->
+                <details class="accordion-item" data-aos="fade-up" data-aos-delay="200">
+                    <summary class="accordion-summary">
+                        Waxing
+                        <i data-lucide="chevron-down" class="w-6 h-6"></i>
+                    </summary>
+                    <div class="accordion-content">
+                        <p class="text-sm text-gray-500 italic mb-4">*Special pricing for body wax maintenance</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 text-gray-700">
+                            <div class="menu-item"><span>Eye Brows</span><span class="menu-dots"></span><span class="font-semibold">$10</span></div>
+                            <div class="menu-item"><span>Lips/Chin/Neck</span><span class="menu-dots"></span><span class="font-semibold">$8</span></div>
+                            <div class="menu-item"><span>Side Burns/Cheeks</span><span class="menu-dots"></span><span class="font-semibold">$8</span></div>
+                            <div class="menu-item"><span>Forehead</span><span class="menu-dots"></span><span class="font-semibold">$10</span></div>
+                            <div class="menu-item"><span>Brows, Lips & Chin</span><span class="menu-dots"></span><span class="font-semibold">$25</span></div>
+                            <div class="menu-item"><span>Back/Chest</span><span class="menu-dots"></span><span class="font-semibold">$35</span></div>
+                            <div class="menu-item"><span>Full Face</span><span class="menu-dots"></span><span class="font-semibold">$35</span></div>
+                            <div class="menu-item"><span>Under Arms</span><span class="menu-dots"></span><span class="font-semibold">$15</span></div>
+                            <div class="menu-item"><span>Half Arms</span><span class="menu-dots"></span><span class="font-semibold">$20</span></div>
+                            <div class="menu-item"><span>Full Arms</span><span class="menu-dots"></span><span class="font-semibold">$35</span></div>
+                            <div class="menu-item"><span>Half Legs</span><span class="menu-dots"></span><span class="font-semibold">$25</span></div>
+                            <div class="menu-item"><span>Full Legs</span><span class="menu-dots"></span><span class="font-semibold">$45</span></div>
+                            <div class="menu-item"><span>Bikini</span><span class="menu-dots"></span><span class="font-semibold">$25</span></div>
+                            <div class="menu-item"><span>Brazilian</span><span class="menu-dots"></span><span class="font-semibold">$45</span></div>
+                            <div class="menu-item"><span>Fingers or Toes</span><span class="menu-dots"></span><span class="font-semibold">$7</span></div>
                         </div>
                     </div>
                 </details>
