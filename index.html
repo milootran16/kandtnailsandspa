@@ -5,23 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>K&T Nails and Spa | Cypress, CA</title>
     
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Lucide Icons --><script src="https://unpkg.com/lucide@latest"></script>
 
-    <!-- AOS Animation Library CSS -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- AOS Animation Library CSS --><link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-    <!-- Google Fonts -->
-    <style>
+    <!-- Google Fonts: Playfair Display (Serif) & Lato (Sans) --><style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap');
         
         body { font-family: 'Lato', sans-serif; }
         h1, h2, h3, h4, .font-serif { font-family: 'Playfair Display', serif; }
         
-        /* Parallax Background */
+        /* Parallax Background Class */
         .parallax {
             background-attachment: fixed;
             background-position: center;
@@ -35,12 +31,41 @@
         ::-webkit-scrollbar-thumb { background: #ec4899; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #db2777; }
 
-        /* Package Accordion Styling */
-        .package-item {
+        /* Custom styling for the native details/summary element (Outer Accordion) */
+        .accordion-item {
+            border: 1px solid #fce7f3;
+            border-radius: 0.75rem; /* rounded-xl */
+            margin-bottom: 1rem;
             background-color: white;
-            border-left: 4px solid #ec4899;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+        }
+        .accordion-summary {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem; /* p-6 */
+            font-size: 1.5rem; /* text-2xl */
+            font-weight: 700; /* font-bold */
+            cursor: pointer;
+            color: #ec4899; /* brand-pink */
+            transition: background-color 0.2s;
+            /* Applying serif font explicitly for better visual consistency with page titles */
+            font-family: 'Playfair Display', serif; 
+            /* CRITICAL FIX: Hide the default drop-down arrow (triangle) */
+            list-style: none; 
+        }
+        .accordion-summary:hover {
+            background-color: #fcf6f8;
+        }
+        /* CRITICAL FIX: Ensures the whole summary is clickable by removing the marker */
+        .accordion-summary::-webkit-details-marker { display: none; }
+        .accordion-content {
+            padding: 0 1.5rem 1.5rem 1.5rem; /* pt-0 */
+        }
+        
+        /* Inner package styling adjustments */
+        .package-item {
             border-radius: 0.5rem;
             overflow: hidden;
         }
@@ -50,73 +75,35 @@
             align-items: center;
             padding: 1.5rem;
             cursor: pointer;
-            list-style: none;
-            background-color: #fdf2f8;
-        }
-        .package-summary:hover {
-            background-color: #fce7f3;
-        }
-        .package-summary::-webkit-details-marker { display: none; }
-        .package-summary h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #ec4899;
-            font-style: italic;
-        }
-        .package-content {
-            padding: 1.5rem;
-            border-top: 1px solid #fce7f3;
-        }
-
-        /* Pink bullet points */
-        .pink-bullet {
-            color: #ec4899;
-            margin-right: 0.5rem;
-        }
-
-        /* Accordion for other services */
-        .accordion-item {
-            border: 1px solid #fce7f3;
-            border-radius: 0.75rem;
-            margin-bottom: 1rem;
-            background-color: white;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
-        .accordion-summary {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.5rem;
-            font-size: 1.5rem;
-            font-weight: 700;
-            cursor: pointer;
-            color: #ec4899;
             transition: background-color 0.2s;
-            font-family: 'Playfair Display', serif;
+            /* CRITICAL FIX for inner packages */
+            list-style: none; 
+        }
+        /* CRITICAL FIX for inner packages */
+        .package-summary::-webkit-details-marker { display: none; }
+        .package-content {
+            padding: 0 1.5rem 1.5rem 1.5rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            margin-top: -1px; /* Correct border overlap */
+        }
+        
+        /* FIX: Ensure Manicure/Pedicure headers don't have default marker padding */
+        .package-content details ul, .package-content details ol {
+            padding-left: 0;
             list-style: none;
         }
-        .accordion-summary:hover {
-            background-color: #fdf2f8;
-        }
-        .accordion-summary::-webkit-details-marker { display: none; }
-        .accordion-content {
-            padding: 0 1.5rem 1.5rem 1.5rem;
+
+        /* FIX: Custom list styling to visually match bullets inside Manicure/Pedicure */
+        .package-content details ul li:before {
+            content: '•';
+            display: inline-block;
+            margin-right: 0.5em;
+            color: #ec4899; /* brand-pink */
         }
 
-        /* Menu dots */
-        .menu-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            padding: 0.25rem 0;
-        }
-        .menu-dots {
-            flex: 1;
-            border-bottom: 1px dotted #d1d5db;
-            margin: 0 0.5rem;
-            min-width: 20px;
+        /* Styling for list headers inside package details */
+        .package-content p.font-semibold {
+            padding-left: 0;
         }
     </style>
     
@@ -139,40 +126,32 @@
 </head>
 <body class="text-gray-700 antialiased selection:bg-brand-pink selection:text-white">
 
-    <!-- Navigation -->
-    <nav id="navbar" class="fixed w-full z-50 transition-all duration-500 py-4 bg-pink-50 shadow-md">
+    <!-- Navigation --><nav id="navbar" class="fixed w-full z-50 transition-all duration-500 py-4 bg-pink-50 shadow-md">
         <div class="container mx-auto px-6 flex justify-between items-center">
-            <!-- Logo -->
-            <div class="flex flex-col items-start cursor-pointer" onclick="window.scrollTo({top:0, behavior:'smooth'})">
-                <img src="K_T_Logo_White.png" alt="K&T Nails and Spa Logo" class="h-20 w-auto hover:scale-105 transition-transform duration-300">
-                <p class="text-xs text-brand-pink font-semibold mt-1 tracking-wide">Your Nails, Our Passion, Always Unforgettable</p>
+            <!-- Logo Area with Image --><div class="flex flex-col items-start cursor-pointer" onclick="window.scrollTo(0,0)">
+                <img src="K_T_Logo_White.jpg" alt="K&T Nails and Spa Logo" class="h-24 w-auto hover:scale-105 transition-transform duration-300"> <!-- Logo height increased to h-24 --><!-- Tagline Updated for prominence and balance --><p class="text-sm text-brand-pink font-bold mt-2 tracking-widest uppercase">Your Nails, Our Passion, Always Unforgettable</p>
             </div>
 
-            <!-- Desktop Menu -->
-            <div class="hidden lg:flex items-center space-x-8">
+            <!-- Desktop Menu --><div class="hidden lg:flex items-center space-x-8">
                 <a href="#home" class="text-sm font-bold uppercase tracking-widest text-gray-800 hover:text-brand-pink transition-colors">Home</a>
                 <a href="#about" class="text-sm font-bold uppercase tracking-widest text-gray-800 hover:text-brand-pink transition-colors">About Us</a>
                 <a href="#services" class="text-sm font-bold uppercase tracking-widest text-gray-800 hover:text-brand-pink transition-colors">Services</a>
             </div>
 
-            <!-- Mobile Menu Button -->
-            <button class="lg:hidden text-gray-800" onclick="toggleMenu()">
+            <!-- Mobile Menu Button --><button class="lg:hidden text-gray-800" onclick="toggleMenu()">
                 <i data-lucide="menu" class="w-8 h-8"></i>
             </button>
         </div>
 
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-white border-t border-gray-200 py-4 px-6 flex flex-col space-y-4 shadow-xl">
+        <!-- Mobile Menu Overlay --><div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-white border-t border-gray-200 py-4 px-6 flex flex-col space-y-4 shadow-xl">
             <a href="#home" class="text-gray-800 font-medium py-2 border-b border-gray-200" onclick="toggleMenu()">HOME</a>
             <a href="#about" class="text-gray-800 font-medium py-2 border-b border-gray-200" onclick="toggleMenu()">ABOUT US</a>
             <a href="#services" class="text-gray-800 font-medium py-2 border-b border-gray-200" onclick="toggleMenu()">SERVICES</a>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <header id="home" class="relative h-screen flex items-center justify-center text-center text-white overflow-hidden">
-        <!-- Background Image -->
-        <div class="absolute inset-0 z-0 parallax" style="background-image: url('hero-manicure.jpg');">
+    <!-- Hero Section (Full Screen Parallax) --><header id="home" class="relative h-screen flex items-center justify-center text-center text-white overflow-hidden">
+        <!-- Background Image --><div class="absolute inset-0 z-0 parallax" style="background-image: url('hero-manicure.jpg');">
             <div class="absolute inset-0 bg-black/50"></div>
         </div>
 
@@ -185,18 +164,17 @@
                 Experience the finest nail care in Cypress, CA. Where luxury meets style and comfort.
             </p>
             <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <button onclick="openContactModal()" class="px-8 py-4 bg-brand-pink text-white font-bold tracking-widest uppercase hover:bg-white hover:text-brand-pink border-2 border-brand-pink transition-all duration-300">
+                <button onclick="openContactModal()" class="px-8 py-4 bg-brand-pink text-white font-bold tracking-widest uppercase hover:bg-white hover:text-brand-pink hover:border-2 hover:border-brand-pink transition-all duration-300">
                     Contact Us
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- Instagram Feed Section -->
-    <section class="py-24 bg-gradient-to-br from-pink-50 to-white">
+    <!-- Instagram Feed Section --><section class="py-24 bg-gradient-to-br from-pink-50 to-white">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16" data-aos="fade-up">
-                <span class="text-brand-pink font-bold uppercase tracking-[0.2em] text-sm">Our Artistry</span>
+                <!-- Subheading FIX: Consistent size and classes across all sections --><span class="text-brand-pink font-bold uppercase tracking-[0.1em] text-lg block mb-2">OUR ARTISTRY</span>
                 <h2 class="text-4xl md:text-5xl font-serif font-bold mt-4 mb-4">Stunning Nail Designs</h2>
                 <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-6">
                     See our latest nail art and spa treatments. Every design is a masterpiece crafted with care and precision.
@@ -207,21 +185,21 @@
                 </a>
             </div>
 
-            <!-- Instagram Widget -->
-            <div class="max-w-6xl mx-auto" data-aos="fade-up">
-                <script src="https://static.elfsight.com/platform/platform.js" async></script>
+            <!-- Instagram Feed Widget Container --><div class="max-w-6xl mx-auto" data-aos="fade-up">
+                <!-- Elfsight Instagram Feed --><script src="https://elfsightcdn.com/platform.js" async></script>
                 <div class="elfsight-app-03287cc4-2871-4410-b46a-f890f689fdd1" data-elfsight-app-lazy></div>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="py-24 bg-gradient-to-br from-gray-50 to-white">
+    <!-- About Section - HEADLINE FONT SIZE FIXED AND TEXT REVERTED --><section id="about" class="py-24 bg-gradient-to-br from-gray-50 to-white">
         <div class="container mx-auto px-4">
             <div class="max-w-4xl mx-auto text-center" data-aos="fade-up">
-                <span class="text-brand-pink font-bold uppercase tracking-[0.2em] text-sm">Our Story</span>
-                <h2 class="text-4xl md:text-5xl font-serif font-bold mt-4 mb-8">Welcome to K&T Nails & Spa</h2>
-                <p class="text-lg text-gray-600 leading-relaxed mb-6">
+                <!-- Subheading FIX: Consistent size and classes across all sections --><span class="text-brand-pink font-bold uppercase tracking-[0.1em] text-lg block mb-2">OUR STORY</span>
+                
+                <!-- Main Title size is already large (h2, text-4xl/5xl) --><h2 class="text-4xl md:text-5xl font-serif font-bold mt-4 mb-8">Welcome to K&T Nails & Spa</h2>
+                
+                <!-- Original text maintained --><p class="text-lg text-gray-600 leading-relaxed mb-6">
                     Since opening our doors in January 2022, K&T Nails and Spa has become Cypress's premier destination for luxury nail care and relaxation. Conveniently located next to Costco at 5353 Katella Ave., we've built a reputation for exceptional service, impeccable hygiene standards, and creating a welcoming atmosphere where every client feels like family.
                 </p>
                 <p class="text-lg text-gray-600 leading-relaxed">
@@ -231,443 +209,349 @@
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section id="services" class="py-24 bg-white">
+    <!-- Services Section --><section id="services" class="py-24 bg-white">
         <div class="container mx-auto px-4">
-            
-            <!-- Purple/Pink Gradient Call Banner -->
-            <div class="max-w-4xl mx-auto mb-12 rounded-2xl bg-gradient-to-r from-pink-500 via-fuchsia-500 to-purple-500 p-8 text-center text-white shadow-xl" data-aos="fade-up">
-                <i data-lucide="phone" class="w-12 h-12 mx-auto mb-4"></i>
-                <h3 class="text-2xl md:text-3xl font-bold mb-2">Call for Pricing and Appointments</h3>
-                <a href="tel:7148206172" class="text-3xl md:text-4xl font-bold hover:underline">714-820-6172</a>
-                <p class="mt-3 text-white/90">We'll help you choose the perfect treatment</p>
+            <div class="text-center mb-16" data-aos="fade-up">
+                <!-- Subheading FIX: Consistent size and classes across all sections --><span class="text-brand-pink font-bold uppercase tracking-[0.1em] text-lg block mb-2">OUR SERVICES</span>
+                <h2 class="text-4xl md:text-5xl font-serif font-bold mt-4 mb-4">Spa Packages & Services</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    Discover our comprehensive menu of premium nail care services designed for ultimate relaxation and beauty. Please call us for current pricing.
+                </p>
             </div>
 
-            <!-- Spa Packages Title -->
-            <div class="max-w-4xl mx-auto mb-8" data-aos="fade-up">
-                <h2 class="text-4xl font-serif font-bold text-brand-pink italic">Spa Packages</h2>
-            </div>
-
-            <!-- 4 Spa Package Dropdowns -->
-            <div class="max-w-4xl mx-auto">
+            <!-- Main Service Container using native <details> --><div class="max-w-6xl mx-auto">
                 
-                <!-- Refresh Package -->
-                <details class="package-item" data-aos="fade-up">
-                    <summary class="package-summary">
-                        <h3>Refresh Package</h3>
-                        <i data-lucide="chevron-down" class="w-6 h-6 text-brand-pink transition-transform"></i>
-                    </summary>
-                    <div class="package-content">
-                        <p class="text-gray-500 italic mb-6">Perfect for a quick refresh and polish</p>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            <!-- Manicure -->
-                            <div>
-                                <h4 class="font-bold text-xl mb-4 text-gray-800 border-b border-gray-200 pb-2">Manicure</h4>
-                                <ul class="space-y-2 text-gray-700">
-                                    <li><span class="pink-bullet">•</span> Nail Trimming, Shaping and Cuticle Care</li>
-                                    <li><span class="pink-bullet">•</span> 2-Minute Massage With Warm Towel</li>
-                                    <li><span class="pink-bullet">•</span> Polish Application</li>
-                                </ul>
-                            </div>
-                            <!-- Pedicure -->
-                            <div>
-                                <h4 class="font-bold text-xl mb-4 text-gray-800 border-b border-gray-200 pb-2">Pedicure</h4>
-                                <ul class="space-y-2 text-gray-700">
-                                    <li><span class="pink-bullet">•</span> Nail Trimming, Shaping and Cuticle Care</li>
-                                    <li><span class="pink-bullet">•</span> Green Tea Mint Aromatherapy</li>
-                                    <li><span class="pink-bullet">•</span> 2-Minute Massage</li>
-                                    <li><span class="pink-bullet">•</span> Hot Stone</li>
-                                    <li><span class="pink-bullet">•</span> Warm Towel</li>
-                                    <li><span class="pink-bullet">•</span> Polish Application</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </details>
-
-                <!-- Replenishment Package -->
-                <details class="package-item" data-aos="fade-up" data-aos-delay="100">
-                    <summary class="package-summary">
-                        <h3>Replenishment Package</h3>
-                        <i data-lucide="chevron-down" class="w-6 h-6 text-brand-pink transition-transform"></i>
-                    </summary>
-                    <div class="package-content">
-                        <p class="text-gray-500 italic mb-6">Restore and rejuvenate with extra care</p>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            <!-- Manicure -->
-                            <div>
-                                <h4 class="font-bold text-xl mb-4 text-gray-800 border-b border-gray-200 pb-2">Manicure</h4>
-                                <ul class="space-y-2 text-gray-700">
-                                    <li><span class="pink-bullet">•</span> Nail Trimming, Shaping and Cuticle Care</li>
-                                    <li><span class="pink-bullet">•</span> Hot Oil/Lotion</li>
-                                    <li><span class="pink-bullet">•</span> 5-Minute Massage With Warm Towel</li>
-                                    <li><span class="pink-bullet">•</span> Polish Application</li>
-                                </ul>
-                            </div>
-                            <!-- Pedicure -->
-                            <div>
-                                <h4 class="font-bold text-xl mb-4 text-gray-800 border-b border-gray-200 pb-2">Pedicure</h4>
-                                <ul class="space-y-2 text-gray-700">
-                                    <li><span class="pink-bullet">•</span> Green Tea Mint Aromatherapy</li>
-                                    <li><span class="pink-bullet">•</span> Nail Trimming, Shaping and Cuticle Care</li>
-                                    <li><span class="pink-bullet">•</span> Exfoliating Scrub</li>
-                                    <li><span class="pink-bullet">•</span> 5-Minute Massage</li>
-                                    <li><span class="pink-bullet">•</span> Hot Stone</li>
-                                    <li><span class="pink-bullet">•</span> Warm Towel</li>
-                                    <li><span class="pink-bullet">•</span> Polish Application</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </details>
-
-                <!-- Relax Package -->
-                <details class="package-item" data-aos="fade-up" data-aos-delay="200">
-                    <summary class="package-summary">
-                        <h3>Relax Package</h3>
-                        <i data-lucide="chevron-down" class="w-6 h-6 text-brand-pink transition-transform"></i>
-                    </summary>
-                    <div class="package-content">
-                        <p class="text-gray-500 italic mb-6">Unwind with our enhanced relaxation services</p>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            <!-- Manicure -->
-                            <div>
-                                <h4 class="font-bold text-xl mb-4 text-gray-800 border-b border-gray-200 pb-2">Manicure</h4>
-                                <ul class="space-y-2 text-gray-700">
-                                    <li><span class="pink-bullet">•</span> Nail Trimming, Shaping and Cuticle Care</li>
-                                    <li><span class="pink-bullet">•</span> Exfoliating Scrub</li>
-                                    <li><span class="pink-bullet">•</span> Hot Oil</li>
-                                    <li><span class="pink-bullet">•</span> Lotion or Cooling Gel Application</li>
-                                    <li><span class="pink-bullet">•</span> 7-Minute Massage With Warm Towel</li>
-                                    <li><span class="pink-bullet">•</span> Polish Application</li>
-                                </ul>
-                            </div>
-                            <!-- Pedicure -->
-                            <div>
-                                <h4 class="font-bold text-xl mb-4 text-gray-800 border-b border-gray-200 pb-2">Pedicure</h4>
-                                <ul class="space-y-2 text-gray-700">
-                                    <li><span class="pink-bullet">•</span> Green Tea Mint Aromatherapy</li>
-                                    <li><span class="pink-bullet">•</span> Nail Trimming, Shaping and Cuticle Care</li>
-                                    <li><span class="pink-bullet">•</span> Callus Treatment</li>
-                                    <li><span class="pink-bullet">•</span> Exfoliating Scrub</li>
-                                    <li><span class="pink-bullet">•</span> Lotion or Cooling Gel Application</li>
-                                    <li><span class="pink-bullet">•</span> 7-Minute Massage</li>
-                                    <li><span class="pink-bullet">•</span> Hot Stone</li>
-                                    <li><span class="pink-bullet">•</span> Warm Towel</li>
-                                    <li><span class="pink-bullet">•</span> Polish Application</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </details>
-
-                <!-- Rejuvenate Package -->
-                <details class="package-item" data-aos="fade-up" data-aos-delay="300">
-                    <summary class="package-summary">
-                        <h3>Rejuvenate Package</h3>
-                        <i data-lucide="chevron-down" class="w-6 h-6 text-brand-pink transition-transform"></i>
-                    </summary>
-                    <div class="package-content">
-                        <p class="text-gray-500 italic mb-6">Our ultimate luxury spa experience</p>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            <!-- Manicure -->
-                            <div>
-                                <h4 class="font-bold text-xl mb-4 text-gray-800 border-b border-gray-200 pb-2">Manicure</h4>
-                                <ul class="space-y-2 text-gray-700">
-                                    <li><span class="pink-bullet">•</span> Nail Trimming, Shaping and Cuticle Care</li>
-                                    <li><span class="pink-bullet">•</span> Exfoliating Scrub</li>
-                                    <li><span class="pink-bullet">•</span> Hot Oil</li>
-                                    <li><span class="pink-bullet">•</span> Lotion or Cooling Gel Application</li>
-                                    <li><span class="pink-bullet">•</span> 12-Minute Relaxing Massage</li>
-                                    <li><span class="pink-bullet">•</span> Warm Towel With Detoxifying Clay Mud Mask</li>
-                                    <li><span class="pink-bullet">•</span> Polish Application</li>
-                                </ul>
-                            </div>
-                            <!-- Pedicure -->
-                            <div>
-                                <h4 class="font-bold text-xl mb-4 text-gray-800 border-b border-gray-200 pb-2">Pedicure</h4>
-                                <ul class="space-y-2 text-gray-700">
-                                    <li><span class="pink-bullet">•</span> Green Tea Mint Aromatherapy</li>
-                                    <li><span class="pink-bullet">•</span> Nail Trimming, Shaping and Cuticle Care</li>
-                                    <li><span class="pink-bullet">•</span> Callus Treatment</li>
-                                    <li><span class="pink-bullet">•</span> Exfoliating Scrub</li>
-                                    <li><span class="pink-bullet">•</span> Lotion or Cooling Gel Application</li>
-                                    <li><span class="pink-bullet">•</span> 12-Minute Relaxing Massage</li>
-                                    <li><span class="pink-bullet">•</span> Hot Stone</li>
-                                    <li><span class="pink-bullet">•</span> Warm Towel With Detoxifying Clay Mud Mask or Hydrating Paraffin Treatment</li>
-                                    <li><span class="pink-bullet">•</span> Polish Application</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </details>
-
-                <!-- Disclaimers -->
-                <div class="mt-8 space-y-2 text-sm text-gray-500 italic" data-aos="fade-up">
-                    <p>*Price may vary based on length and design complexity. Please call us for details.</p>
-                    <p>*Special pricing available for maintenance appointments. Please call us for pricing.</p>
+                <!-- Call for Pricing Banner --><div class="text-center mb-8 p-6 bg-gradient-to-r from-brand-pink to-purple-500 text-white rounded-lg shadow-lg" data-aos="fade-up">
+                    <i data-lucide="phone" class="w-8 h-8 mx-auto mb-3"></i>
+                    <p class="text-xl font-bold mb-2">Call for Pricing and Appointments</p>
+                    <a href="tel:7148206172" class="text-2xl font-bold hover:underline">714-820-6172</a>
+                    <p class="text-sm mt-2 opacity-90">We'll help you choose the perfect treatment</p>
                 </div>
 
-                <!-- Nail Enhancement -->
-                <details class="accordion-item mt-12" data-aos="fade-up">
+                <!-- 1. SPA PACKAGES DROPDOWN (Outer) --><details class="accordion-item" open data-aos="fade-up" data-aos-delay="0">
+                    <summary class="accordion-summary">
+                        Spa Packages
+                    </summary>
+                    <div class="accordion-content">
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                            
+                            <!-- ** INNER DROPDOWN: Refresh Package ** --><details class="package-item bg-pink-50 shadow-md border border-pink-200" open>
+                                <summary class="package-summary hover:bg-pink-100">
+                                    <h4 class="text-2xl font-serif font-bold text-brand-pink">Refresh Package</h4>
+                                </summary>
+                                <div class="package-content">
+                                    <p class="text-gray-600 mb-4 italic">Perfect for a quick refresh and polish</p>
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                        <div>
+                                            <p class="font-semibold text-lg border-b border-brand-pink/50 mb-2">Manicure</p>
+                                            <ul class="text-sm text-gray-600 space-y-1">
+                                                <li>Nail Trimming, Shaping and Cuticle Care</li>
+                                                <li>2-Minute Massage</li>
+                                                <li>Warm Towel</li>
+                                                <li>Polish Application</li>
+                                                <li>Optional Gel Color Upgrade Available</li>
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <p class="font-semibold text-lg border-b border-brand-teal/50 mb-2">Pedicure</p>
+                                            <ul class="text-sm text-gray-600 space-y-1">
+                                                <li>Nail Trimming, Shaping and Cuticle Care</li>
+                                                <li>2-Minute Massage</li>
+                                                <li>Hot Stone</li>
+                                                <li>Warm Towel</li>
+                                                <li>Polish Application</li>
+                                                <li>Optional Gel Color Upgrade Available</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </details>
+
+                            <!-- ** INNER DROPDOWN: Replenishment Package ** --><details class="package-item bg-teal-50 shadow-md border border-teal-200">
+                                <summary class="package-summary hover:bg-teal-100">
+                                    <h4 class="text-2xl font-serif font-bold text-brand-teal">Replenishment Package</h4>
+                                </summary>
+                                <div class="package-content">
+                                    <p class="text-gray-600 mb-4 italic">Restore and rejuvenate with extra care</p>
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                        <div>
+                                            <p class="font-semibold text-lg border-b border-brand-pink/50 mb-2">Manicure</p>
+                                            <ul class="text-sm text-gray-600 space-y-1">
+                                                <li>Nail Trimming, Shaping and Cuticle Care</li>
+                                                <li>Exfoliating Scrub</li>
+                                                <li>Hot Oil/Lotion</li>
+                                                <li>5-Minute Massage</li>
+                                                <li>Hot Stone & Warm Towel</li>
+                                                <li>Polish Application</li>
+                                                <li>Optional Gel Color Upgrade Available</li>
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <p class="font-semibold text-lg border-b border-brand-teal/50 mb-2">Pedicure</p>
+                                            <ul class="text-sm text-gray-600 space-y-1">
+                                                <li>Nail Trimming, Shaping and Cuticle Care</li>
+                                                <li>Exfoliating Scrub</li>
+                                                <li>Hot Oil/Lotion</li>
+                                                <li>5-Minute Massage</li>
+                                                <li>Hot Stone & Warm Towel</li>
+                                                <li>Polish Application</li>
+                                                <li>Optional Gel Color Upgrade Available</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </details>
+
+                            <!-- ** INNER DROPDOWN: Relax Package ** --><details class="package-item bg-purple-50 shadow-md border border-purple-200">
+                                <summary class="package-summary hover:bg-purple-100">
+                                    <h4 class="text-2xl font-serif font-bold text-purple-600">Relax Package</h4>
+                                </summary>
+                                <div class="package-content">
+                                    <p class="text-gray-600 mb-4 italic">Unwind with extended massage and premium care</p>
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                        <div>
+                                            <p class="font-semibold text-lg border-b border-brand-pink/50 mb-2">Manicure</p>
+                                            <ul class="text-sm text-gray-600 space-y-1">
+                                                <li>Nail Trimming, Shaping and Cuticle Care</li>
+                                                <li>Exfoliating Scrub</li>
+                                                <li>Hot Oil & Cooling Gel</li>
+                                                <li>7-Minute Massage</li>
+                                                <li>Hot Stone & Warm Towel</li>
+                                                <li>Polish Application</li>
+                                                <li>Optional Gel Color Upgrade Available</li>
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <p class="font-semibold text-lg border-b border-brand-teal/50 mb-2">Pedicure</p>
+                                            <ul class="text-sm text-gray-600 space-y-1">
+                                                <li>Nail Trimming, Shaping and Cuticle Care</li>
+                                                <li>Callus Treatment</li>
+                                                <li>Exfoliating Scrub</li>
+                                                <li>Hot Oil & Cooling Gel</li>
+                                                <li>7-Minute Massage</li>
+                                                <li>Hot Stone & Warm Towel</li>
+                                                <li>Polish Application</li>
+                                                <li>Optional Gel Color Upgrade Available</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </details>
+
+                            <!-- ** INNER DROPDOWN: Rejuvenate Package ** --><details class="package-item bg-yellow-50 shadow-md border border-yellow-200">
+                                <summary class="package-summary hover:bg-yellow-100">
+                                    <h4 class="text-2xl font-serif font-bold text-brand-gold">Rejuvenate Package</h4>
+                                </summary>
+                                <div class="package-content">
+                                    <p class="text-gray-600 mb-4 italic">Our ultimate luxury spa experience</p>
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                        <div>
+                                            <p class="font-semibold text-lg border-b border-brand-pink/50 mb-2">Manicure</p>
+                                            <ul class="text-sm text-gray-600 space-y-1">
+                                                <li>Nail Trimming, Shaping and Cuticle Care</li>
+                                                <li>Exfoliating Scrub</li>
+                                                <li>Hot Oil & Cooling Gel</li>
+                                                <li>12-Minute Relaxing Massage</li>
+                                                <li>Hot Stone & Warm Towel</li>
+                                                <li>Detoxifying Clay Mud Mask or Paraffin</li>
+                                                <li>Polish Application</li>
+                                                <li>Optional Gel Color Upgrade Available</li>
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <p class="font-semibold text-lg border-b border-brand-teal/50 mb-2">Pedicure</p>
+                                            <ul class="text-sm text-gray-600 space-y-1">
+                                                <li>Nail Trimming, Shaping and Cuticle Care</li>
+                                                <li>Callus Treatment</li>
+                                                <li>Exfoliating Scrub</li>
+                                                <li>Hot Oil & Cooling Gel</li>
+                                                <li>12-Minute Relaxing Massage</li>
+                                                <li>Hot Stone & Warm Towel</li>
+                                                <li>Detoxifying Clay Mud Mask or Paraffin</li>
+                                                <li>Polish Application</li>
+                                                <li>Optional Gel Color Upgrade Available</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- 2. NAIL ENHANCEMENT DROPDOWN --><details class="accordion-item" data-aos="fade-up" data-aos-delay="100">
                     <summary class="accordion-summary">
                         Nail Enhancement
-                        <i data-lucide="chevron-down" class="w-6 h-6"></i>
                     </summary>
                     <div class="accordion-content">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                             <div>
-                                <h4 class="font-bold text-lg mb-4 text-brand-pink">Overlay</h4>
-                                <div class="space-y-2 text-gray-700">
-                                    <div class="menu-item"><span>Acrylic</span><span class="menu-dots"></span><span class="font-semibold">$40+</span></div>
-                                    <div class="menu-item"><span>Dipping Powder</span><span class="menu-dots"></span><span class="font-semibold">$45+</span></div>
-                                    <div class="menu-item"><span>Builder Gel</span><span class="menu-dots"></span><span class="font-semibold">$45+</span></div>
-                                </div>
-                                
-                                <h4 class="font-bold text-lg mb-4 mt-6 text-brand-pink">Full Set</h4>
-                                <div class="space-y-2 text-gray-700">
-                                    <div class="menu-item"><span>Acrylic</span><span class="menu-dots"></span><span class="font-semibold">$45+</span></div>
-                                    <div class="menu-item"><span>Dipping Powder</span><span class="menu-dots"></span><span class="font-semibold">$50+</span></div>
-                                    <div class="menu-item"><span>Builder Gel</span><span class="menu-dots"></span><span class="font-semibold">$50+</span></div>
-                                    <div class="menu-item"><span>Gel-X</span><span class="menu-dots"></span><span class="font-semibold">$55+</span></div>
-                                </div>
+                                <h4 class="font-bold text-lg mb-3 text-brand-pink">Overlay</h4>
+                                <ul class="space-y-2 text-gray-700">
+                                    <li>Acrylic Overlay</li>
+                                    <li>Dipping Powder Overlay</li>
+                                    <li>Builder Gel Overlay</li>
+                                </ul>
                             </div>
                             <div>
-                                <h4 class="font-bold text-lg mb-4 text-brand-pink">Maintenance</h4>
-                                <div class="space-y-2 text-gray-700">
-                                    <div class="menu-item"><span>Refill</span><span class="menu-dots"></span><span class="font-semibold">$40+</span></div>
-                                    <div class="menu-item"><span>Cut Down</span><span class="menu-dots"></span><span class="font-semibold">$3+</span></div>
-                                    <div class="menu-item"><span>Gel Remover</span><span class="menu-dots"></span><span class="font-semibold">$10</span></div>
-                                    <div class="menu-item"><span>Acrylic Remover</span><span class="menu-dots"></span><span class="font-semibold">$15</span></div>
-                                </div>
+                                <h4 class="font-bold text-lg mb-3 text-brand-pink">Full Set</h4>
+                                <ul class="space-y-2 text-gray-700">
+                                    <li>Acrylic Full Set</li>
+                                    <li>Dipping Powder Full Set</li>
+                                    <li>Builder Gel Full Set</li>
+                                    <li>Gel-X Full Set</li>
+                                </ul>
                             </div>
                         </div>
-                        <p class="text-xs text-gray-500 italic mt-6">**Price subject to change due to length or extra preparation and cut down</p>
+                        <div class="mb-6">
+                            <h4 class="font-bold text-lg mb-3 text-brand-pink">Maintenance & Removal</h4>
+                            <ul class="space-y-2 text-gray-700">
+                                <li>Refill</li>
+                                <li>Cut Down</li>
+                                <li>Gel/Acrylic Removal</li>
+                            </ul>
+                        </div>
+                        <p class="text-xs text-gray-500 italic">*Price may vary based on length and design complexity. Please call us for details.</p>
                     </div>
                 </details>
 
-                <!-- Additional Services -->
-                <details class="accordion-item" data-aos="fade-up" data-aos-delay="100">
+                <!-- 3. ADDITIONAL SERVICES DROPDOWN --><details class="accordion-item" data-aos="fade-up" data-aos-delay="200">
                     <summary class="accordion-summary">
                         Additional Services
-                        <i data-lucide="chevron-down" class="w-6 h-6"></i>
                     </summary>
                     <div class="accordion-content">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 text-gray-700">
-                            <div class="menu-item"><span>Polish Change Manicure</span><span class="menu-dots"></span><span class="font-semibold">$10</span></div>
-                            <div class="menu-item"><span>Polish Change Pedicure</span><span class="menu-dots"></span><span class="font-semibold">$15</span></div>
-                            <div class="menu-item"><span>Callus Removal</span><span class="menu-dots"></span><span class="font-semibold">$8</span></div>
-                            <div class="menu-item"><span>Paraffin</span><span class="menu-dots"></span><span class="font-semibold">$10</span></div>
-                            <div class="menu-item"><span>Clay Mask</span><span class="menu-dots"></span><span class="font-semibold">$8</span></div>
-                            <div class="menu-item"><span>Shiny Buff</span><span class="menu-dots"></span><span class="font-semibold">$5</span></div>
-                            <div class="menu-item"><span>Ombre/Chrome/Hologram/Fairy Dust</span><span class="menu-dots"></span><span class="font-semibold">$10</span></div>
-                            <div class="menu-item"><span>French Tip</span><span class="menu-dots"></span><span class="font-semibold">$7+</span></div>
-                            <div class="menu-item"><span>Design</span><span class="menu-dots"></span><span class="font-semibold">$6</span></div>
-                            <div class="menu-item"><span>Sea Salt Scrub</span><span class="menu-dots"></span><span class="font-semibold">$6</span></div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <ul class="space-y-2 text-gray-700">
+                                    <li>Polish Change (Manicure)</li>
+                                    <li>Polish Change (Pedicure)</li>
+                                    <li>Callus Removal</li>
+                                    <li>Paraffin Treatment</li>
+                                    <li>Clay Mask</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <ul class="space-y-2 text-gray-700">
+                                    <li>Shiny Buff</li>
+                                    <li>Ombre/Chrome/Hologram</li>
+                                    <li>French Tip</li>
+                                    <li>Custom Design</li>
+                                    <li>Sea Salt Scrub</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </details>
-
-                <!-- Waxing -->
-                <details class="accordion-item" data-aos="fade-up" data-aos-delay="200">
+                
+                <!-- 4. WAXING SERVICES DROPDOWN --><details class="accordion-item" data-aos="fade-up" data-aos-delay="300">
                     <summary class="accordion-summary">
-                        Waxing
-                        <i data-lucide="chevron-down" class="w-6 h-6"></i>
+                        Waxing Services
                     </summary>
                     <div class="accordion-content">
-                        <p class="text-sm text-gray-500 italic mb-4">*Special pricing for body wax maintenance</p>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 text-gray-700">
-                            <div class="menu-item"><span>Eye Brows</span><span class="menu-dots"></span><span class="font-semibold">$10</span></div>
-                            <div class="menu-item"><span>Lips/Chin/Neck</span><span class="menu-dots"></span><span class="font-semibold">$8</span></div>
-                            <div class="menu-item"><span>Side Burns/Cheeks</span><span class="menu-dots"></span><span class="font-semibold">$8</span></div>
-                            <div class="menu-item"><span>Forehead</span><span class="menu-dots"></span><span class="font-semibold">$10</span></div>
-                            <div class="menu-item"><span>Brows, Lips & Chin</span><span class="menu-dots"></span><span class="font-semibold">$25</span></div>
-                            <div class="menu-item"><span>Back/Chest</span><span class="menu-dots"></span><span class="font-semibold">$35</span></div>
-                            <div class="menu-item"><span>Full Face</span><span class="menu-dots"></span><span class="font-semibold">$35</span></div>
-                            <div class="menu-item"><span>Under Arms</span><span class="menu-dots"></span><span class="font-semibold">$15</span></div>
-                            <div class="menu-item"><span>Half Arms</span><span class="menu-dots"></span><span class="font-semibold">$20</span></div>
-                            <div class="menu-item"><span>Full Arms</span><span class="menu-dots"></span><span class="font-semibold">$35</span></div>
-                            <div class="menu-item"><span>Half Legs</span><span class="menu-dots"></span><span class="font-semibold">$25</span></div>
-                            <div class="menu-item"><span>Full Legs</span><span class="menu-dots"></span><span class="font-semibold">$45</span></div>
-                            <div class="menu-item"><span>Bikini</span><span class="menu-dots"></span><span class="font-semibold">$25</span></div>
-                            <div class="menu-item"><span>Brazilian</span><span class="menu-dots"></span><span class="font-semibold">$45</span></div>
-                            <div class="menu-item"><span>Fingers or Toes</span><span class="menu-dots"></span><span class="font-semibold">$7</span></div>
+                        <p class="text-sm text-gray-600 italic mb-6 text-center">*Special pricing available for maintenance appointments. Please call us for pricing.</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-semibold mb-3 text-brand-pink">Facial</h4>
+                                <ul class="space-y-2 text-gray-700">
+                                    <li>Eyebrows</li>
+                                    <li>Lips / Chin / Neck</li>
+                                    <li>Side Burns / Cheeks</li>
+                                    <li>Forehead</li>
+                                    <li>Brows, Lips, & Chin</li>
+                                    <li>Full Face</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-3 text-brand-pink">Body</h4>
+                                <ul class="space-y-2 text-gray-700">
+                                    <li>Back / Chest</li>
+                                    <li>Under Arms</li>
+                                    <li>Half Arms</li>
+                                    <li>Full Arms</li>
+                                    <li>Half Legs</li>
+                                    <li>Full Legs</li>
+                                    <li>Bikini</li>
+                                    <li>Brazilian</li>
+                                    <li>Fingers or Toes</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </details>
-            </div>
 
-            <div class="text-center mt-12" data-aos="fade-up">
-                <p class="text-gray-600 mb-4">Walk-ins welcome! We look forward to serving you.</p>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <section class="bg-zinc-900 text-white py-16">
+    <!-- Contact Section --><section id="contact" class="py-24 bg-white">
         <div class="container mx-auto px-4">
-            <!-- Info Cards -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-                <div class="flex flex-col items-center p-6 bg-zinc-800 rounded-lg" data-aos="fade-up">
-                    <i data-lucide="clock" class="w-8 h-8 mb-4 text-brand-pink"></i>
-                    <h4 class="font-serif font-bold text-xl mb-3 text-brand-pink">Hours</h4>
-                    <p class="text-gray-300">Mon - Fri: 9:00 AM - 7:00 PM</p>
-                    <p class="text-gray-300">Saturday: 9:00 AM - 6:00 PM</p>
-                    <p class="text-gray-400 text-sm mt-2">Sunday: Closed</p>
-                </div>
-                <div class="flex flex-col items-center p-6 bg-zinc-800 rounded-lg" data-aos="fade-up" data-aos-delay="100">
-                    <i data-lucide="map-pin" class="w-8 h-8 mb-4 text-brand-pink"></i>
-                    <h4 class="font-serif font-bold text-xl mb-3 text-brand-pink">Location</h4>
-                    <p class="text-gray-300">5353 Katella Ave., Unit A</p>
-                    <p class="text-gray-300">Cypress, CA 90720</p>
-                    <a href="https://maps.google.com/?q=5353+Katella+Ave+Unit+A+Cypress+CA" target="_blank" class="text-brand-teal hover:underline text-sm mt-2">Get Directions →</a>
-                </div>
-                <div class="flex flex-col items-center p-6 bg-zinc-800 rounded-lg" data-aos="fade-up" data-aos-delay="200">
-                    <i data-lucide="phone" class="w-8 h-8 mb-4 text-brand-pink"></i>
-                    <h4 class="font-serif font-bold text-xl mb-3 text-brand-pink">Call Today</h4>
-                    <a href="tel:7148206172" class="text-2xl font-bold text-gray-300 hover:text-brand-pink transition-colors">714-820-6172</a>
-                    <p class="text-gray-400 text-sm mt-2">Walk-ins Welcome!</p>
-                </div>
-            </div>
-
-            <!-- Logo and Social -->
-            <div class="text-center mb-12" data-aos="fade-up">
-                <div class="flex justify-center mb-6">
-                    <img src="K_T_Logo_White.png" alt="K&T Nails and Spa Logo" class="h-16 w-auto">
-                </div>
-                <p class="text-gray-400 leading-relaxed max-w-lg mx-auto mb-8">
-                    Your premier destination for nail care and relaxation in Cypress. Follow us on social media for the latest deals and nail art trends!
+            <div class="text-center mb-16" data-aos="fade-up">
+                <!-- Subheading FIX: Consistent size and classes across all sections --><span class="text-brand-pink font-bold uppercase tracking-[0.1em] text-lg block mb-2">GET IN TOUCH</span>
+                <h2 class="text-4xl md:text-5xl font-serif font-bold mt-4 mb-4">Visit Us Today</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    Walk-ins welcome! We look forward to serving you.
                 </p>
-                <!-- Social Icons -->
-                <div class="flex justify-center space-x-6">
-                    <a href="https://www.facebook.com/kandtnailsandspa" target="_blank" rel="noopener noreferrer" class="w-14 h-14 rounded-full bg-zinc-800 flex items-center justify-center hover:bg-brand-pink transition-colors" title="Facebook">
-                        <i data-lucide="facebook" class="w-7 h-7"></i>
-                    </a>
-                    <a href="https://www.instagram.com/kntnailsandspa" target="_blank" rel="noopener noreferrer" class="w-14 h-14 rounded-full bg-zinc-800 flex items-center justify-center hover:bg-brand-pink transition-colors" title="Instagram">
-                        <i data-lucide="instagram" class="w-7 h-7"></i>
-                    </a>
-                    <a href="https://yelp.to/QXoz5-TAWd" target="_blank" rel="noopener noreferrer" class="w-14 h-14 rounded-full bg-zinc-800 flex items-center justify-center hover:bg-brand-pink transition-colors" title="Yelp">
-                        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M20.16 12.594l-4.995 1.433c-.96.276-1.74-.8-1.176-1.63l2.905-4.308a1.072 1.072 0 0 1 1.596-.206l2.039 1.78c.674.588.424 1.66-.369 1.932zm-7.166 3.596l1.74 4.89c.263.73-.449 1.42-1.145 1.1l-3.997-1.838a1.073 1.073 0 0 1-.481-1.44l1.097-2.427c.433-.96 1.863-.99 2.786-.285zm-5.043-1.047l-4.065 2.816c-.608.422-1.44-.086-1.323-.808l.67-4.153a1.073 1.073 0 0 1 1.145-.89l2.72.288c1.04.11 1.55 1.438.853 2.747zm-.947-6.142L3.74 4.614c-.486-.58-.062-1.49.69-1.444l4.317.264a1.073 1.073 0 0 1 .988 1.062l-.092 2.726c-.036 1.05-1.335 1.571-2.639.779zM12 10.5c-.828 0-1.5.672-1.5 1.5s.672 1.5 1.5 1.5 1.5-.672 1.5-1.5-.672-1.5-1.5-1.5z"/>
-                        </svg>
-                    </a>
-                    <a href="https://share.google/bspvpp763hA9GHBVb" target="_blank" rel="noopener noreferrer" class="w-14 h-14 rounded-full bg-zinc-800 flex items-center justify-center hover:bg-brand-pink transition-colors" title="Google">
-                        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-                            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-                        </svg>
-                    </a>
-                </div>
             </div>
 
-            <!-- Copyright -->
-            <div class="border-t border-zinc-800 pt-8 text-center text-gray-500 text-sm">
-                © 2025 K&T Nails and Spa. All rights reserved.
+            <div class="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+                <div data-aos="fade-up" data-aos-delay="0">
+                    <h3 class="text-2xl font-serif font-bold mb-6">Contact Information</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <i data-lucide="map-pin" class="w-6 h-6 mr-4 text-brand-pink mt-1"></i>
+                            <div>
+                                <h4 class="font-bold mb-1">Address</h4>
+                                <p class="text-gray-600">5353 Katella Ave., Unit A<br>Cypress, CA 90720</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i data-lucide="phone" class="w-6 h-6 mr-4 text-brand-pink mt-1"></i>
+                            <div>
+                                <h4 class="font-bold mb-1">Phone</h4>
+                                <p class="text-gray-600">714-820-6172</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i data-lucide="clock" class="w-6 h-6 mr-4 text-brand-pink mt-1"></i>
+                            <div>
+                                <h4 class="font-bold mb-1">Hours</h4>
+                                <p class="text-gray-600">
+                                    Mon - Fri: 9:00 AM - 7:00 PM<br>
+                                    Saturday: 9:00 AM - 6:00 PM<br>
+                                    Sunday: Closed
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div data-aos="fade-up" data-aos-delay="100">
+                    <div class="bg-gray-100 rounded-lg p-8">
+                        <h3 class="text-2xl font-serif font-bold mb-4">Ready to Book?</h3>
+                        <p class="text-gray-600 mb-6">
+                            Call us today to schedule your appointment or simply walk in. We're here to make you look and feel beautiful!
+                        </p>
+                        <a href="tel:7148206172" class="inline-block px-8 py-4 bg-brand-pink text-white font-bold tracking-widest uppercase hover:bg-brand-dark transition-colors rounded">
+                            Call Now
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Modal -->
-    <div id="contactModal" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-[100] flex items-center justify-center p-4" onclick="closeContactModal(event)">
-        <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 transform transition-all" onclick="event.stopPropagation()">
-            <div class="text-center">
-                <div class="mx-auto w-16 h-16 bg-brand-pink rounded-full flex items-center justify-center mb-4">
-                    <i data-lucide="phone" class="w-8 h-8 text-white"></i>
-                </div>
-                <h3 class="text-2xl font-serif font-bold mb-2">Call Us Today!</h3>
-                <p class="text-gray-600 mb-6">We're ready to serve you</p>
-                <a href="tel:7148206172" class="inline-block text-4xl font-bold text-brand-pink hover:text-brand-dark transition-colors mb-6">
-                    714-820-6172
-                </a>
-                <div class="space-y-2 text-sm text-gray-600 mb-6">
-                    <p><strong>Mon - Fri:</strong> 9:00 AM - 7:00 PM</p>
-                    <p><strong>Saturday:</strong> 9:00 AM - 6:00 PM</p>
-                    <p><strong>Sunday:</strong> Closed</p>
-                </div>
-                <div class="flex gap-3">
-                    <a href="tel:7148206172" class="flex-1 px-6 py-3 bg-brand-pink text-white font-bold rounded-lg hover:bg-brand-dark transition-colors">
-                        Call Now
-                    </a>
-                    <button onclick="closeContactModal()" class="flex-1 px-6 py-3 bg-gray-200 text-gray-700 font-bold rounded-lg hover:bg-gray-300 transition-colors">
-                        Close
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- Scroll to Top Button -->
-    <button onclick="window.scrollTo({top:0, behavior:'smooth'})" class="fixed bottom-8 right-8 bg-brand-pink text-white p-3 rounded-full shadow-lg hover:bg-white hover:text-brand-pink transition-all z-50 border border-brand-pink">
-        <i data-lucide="arrow-up" class="w-6 h-6"></i>
-    </button>
-
-    <!-- Scripts -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        // Initialize on DOM load
-        document.addEventListener('DOMContentLoaded', function() {
-            // AOS Animations
-            if (typeof AOS !== 'undefined') {
-                AOS.init({
-                    once: true,
-                    offset: 100,
-                    duration: 800,
-                    easing: 'ease-out-cubic',
-                });
-            }
-
-            // Lucide Icons
-            if (typeof lucide !== 'undefined') {
-                lucide.createIcons();
-            }
-        });
-
-        // Contact Modal
-        function openContactModal() {
-            const modal = document.getElementById('contactModal');
-            modal.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-            setTimeout(() => {
-                if (typeof lucide !== 'undefined') {
-                    lucide.createIcons();
-                }
-            }, 100);
-        }
-
-        function closeContactModal(event) {
-            if (!event || event.target.id === 'contactModal') {
-                const modal = document.getElementById('contactModal');
-                modal.classList.add('hidden');
-                document.body.style.overflow = 'auto';
-            }
-        }
-
-        // Close modal with Escape key
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                closeContactModal();
-            }
-        });
-
-        // Mobile Menu Toggle
-        function toggleMenu() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
-        }
-
-        // Navbar Scroll Effect
-        window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('py-3', 'shadow-lg', 'bg-pink-100');
-                navbar.classList.remove('py-4', 'bg-pink-50');
-            } else {
-                navbar.classList.remove('py-3', 'shadow-lg', 'bg-pink-100');
-                navbar.classList.add('py-4', 'bg-pink-50');
-            }
-        });
-    </script>
-</body>
-</html>
+    <!-- Footer --><section class="bg-zinc-900 text-white py-16">
+        <div class="container mx-auto px-4">
+            
+            <!-- Info Strip Section (Keep this 3-column) --><div class="mb-16 pb-16 border-b border-zinc-800">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <div class="flex flex-col items-center p-6 bg-zinc-800 rounded-lg" data-aos="fade-up" data-aos-delay="0">
+                        <i data-lucide="clock" class="w-8 h-8 mb-4 text-brand-pink"></i>
+                        <h4 class="font-serif font-bold text-xl mb-3 text-brand-pink">Opening Hours</h4>
+                        <p class="text-gray-300">Mon - Fri: 9:00 AM - 7:00 PM</p>
+                        <p class="text-gray-300">Sat: 9am - 6pm</p>
+                        <p class="text-gray-300 text-sm mt-2">Sunday: Closed</p>
+                    </div>
+                    <div class="flex flex-col items-center p-6 bg-zinc-800 rounded-lg" data-aos="fade-up" data-aos-delay="100">
+                        <i data-lucide="map-pin" class="w-8 h-8
